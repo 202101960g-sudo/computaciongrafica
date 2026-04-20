@@ -3,161 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Computación Gráfica</title>
+    <title>Portafolio | Eliseo Pancorbo Diaz</title>
     <style>
-        /* Estilos generales y fondo moderno */
+        /* Diseño "Fino" y Profesional */
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #c9d1d9;
+            --accent: #58a6ff;
+            --accent-hover: #79c0ff;
+            --border: #30363d;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
-            padding: 40px 20px;
+            padding: 50px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
         }
 
-        h1 {
-            color: #00ffcc;
-            font-size: 2.5rem;
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
-            margin-bottom: 5px;
+        .header {
             text-align: center;
-        }
-
-        p.subtitle {
-            color: #a8b2d1;
-            margin-bottom: 40px;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
-        /* Contenedor tipo Grid para las tarjetas */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
             width: 100%;
-            max-width: 1100px;
+            max-width: 800px;
         }
 
-        /* Estilo de cada tarjeta (Efecto vidrio) */
+        .header h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .header h2 {
+            color: #8b949e;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .section-title {
+            grid-column: 1 / -1;
+            font-size: 1.1rem;
+            color: #8b949e;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px 0 rgba(0, 255, 204, 0.2);
-            border-color: rgba(0, 255, 204, 0.3);
+            transform: translateY(-3px);
+            border-color: var(--accent);
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .card-header h2 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: #fff;
-        }
-
-        .card-header .icon {
-            font-size: 1.5rem;
-        }
-
-        /* Estilo de los links (Botones internos) */
-        .link-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .link-list li {
-            margin-bottom: 12px;
-        }
-
-        .link-list a {
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.2);
-            color: #ccd6f6;
-            text-decoration: none;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-        }
-
-        .link-list a:hover {
-            background: rgba(0, 255, 204, 0.1);
-            color: #00ffcc;
-            border-left: 4px solid #00ffcc;
-            transform: translateX(5px);
-        }
-
-        .link-list a span {
-            margin-right: 10px;
+        .card h3 {
+            color: #ffffff;
             font-size: 1.2rem;
+            margin: 0 0 15px 0;
+        }
+
+        .card a {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .card a:hover {
+            background-color: var(--border);
+            color: var(--accent-hover);
+        }
+        
+        .footer {
+            margin-top: 50px;
+            font-size: 0.85rem;
+            color: #8b949e;
         }
     </style>
 </head>
 <body>
 
-    <h1>Portafolio de Prácticas</h1>
-    <p class="subtitle">Computación Gráfica - Ejercicios Interactivos</p>
+    <div class="header">
+        <h1>Eliseo Pancorbo Diaz</h1>
+        <h2>Computación Gráfica</h2>
+    </div>
 
-    <div class="dashboard">
+    <div class="container">
+        
+        <div class="section-title">Proyectos Dinámicos</div>
 
         <div class="card">
-            <div class="card-header">
-                <h2>Clase 1</h2>
-                <span class="icon">⚡</span>
-            </div>
-            <ul class="link-list">
-                <li><a href="Gráfico de Barras.html"><span>📁</span> Gráfico de Barras.html</a></li>
-                <li><a href="Función Arriba.html"><span>📁</span> Función Arriba.html</a></li>
-                <li><a href="Ejercicio Profe.html"><span>📁</span> Ejercicio Profe.html</a></li>
-            </ul>
+            <h3>Gráfico de Barras Dinámico</h3>
+            <p style="font-size: 0.9rem; color: #8b949e;">Barras que actualizan su valor aleatoriamente en tiempo real.</p>
+            <a href="barras.html">Ver Ejercicio</a>
         </div>
 
         <div class="card">
-            <div class="card-header">
-                <h2>Clase 2</h2>
-                <span class="icon">🔥</span>
-            </div>
-            <ul class="link-list">
-                <li><a href="Función Abajo.html"><span>🔥</span> Función Abajo.html</a></li>
-                <li><a href="Función Derecha.html"><span>🔥</span> Función Derecha.html</a></li>
-                <li><a href="Función Izquierda.html"><span>🔥</span> Función Izquierda.html</a></li>
-            </ul>
+            <h3>Línea Doble Dinámica</h3>
+            <p style="font-size: 0.9rem; color: #8b949e;">Animación de dos ondas oscilando sobre y bajo una recta central.</p>
+            <a href="linea_doble.html">Ver Ejercicio</a>
+        </div>
+
+        <div class="section-title">Prácticas Canvas (Imágenes)</div>
+
+        <div class="card">
+            <h3>Ejercicio 2: Figuras</h3>
+            <p style="font-size: 0.9rem; color: #8b949e;">Dibujo de un cuadrado y un triángulo usando trazos.</p>
+            <a href="ejercicio2_figuras.html">Ver Ejercicio</a>
         </div>
 
         <div class="card">
-            <div class="card-header">
-                <h2>Actividad Práctica</h2>
-                <span class="icon">🚀</span>
-            </div>
-            <ul class="link-list">
-                <li><a href="Línea Dinámica.html"><span>📒</span> Línea Dinámica.html</a></li>
-                <li><a href="Trabajo Clase 1.html"><span>📒</span> Trabajo Clase 1.html</a></li>
-                <li><a href="Trabajo Clase 2.html"><span>📒</span> Trabajo Clase 2.html</a></li>
-            </ul>
+            <h3>Ejercicio 3: Barras Estáticas</h3>
+            <p style="font-size: 0.9rem; color: #8b949e;">Gráfico de barras creado con datos predefinidos en Canvas.</p>
+            <a href="ejercicio3_barras.html">Ver Ejercicio</a>
         </div>
 
+        <div class="card">
+            <h3>Ejercicio 4: Función Matemática</h3>
+            <p style="font-size: 0.9rem; color: #8b949e;">Gráfica de la función matemática cuadrática y = x².</p>
+            <a href="ejercicio4_funcion.html">Ver Ejercicio</a>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Eliseo Pancorbo Diaz - Portafolio Académico
     </div>
 
 </body>
