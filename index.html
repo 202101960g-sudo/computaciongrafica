@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio | Eliseo Pancorbo Diaz</title>
     <style>
-        /* Diseño "Fino" y Profesional */
         :root {
             --bg-color: #0d1117;
             --card-bg: #161b22;
@@ -14,7 +13,6 @@
             --accent-hover: #79c0ff;
             --border: #30363d;
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
@@ -25,7 +23,6 @@
             flex-direction: column;
             align-items: center;
         }
-
         .header {
             text-align: center;
             margin-bottom: 50px;
@@ -34,62 +31,38 @@
             width: 100%;
             max-width: 800px;
         }
-
         .header h1 {
             color: #ffffff;
             font-size: 2.5rem;
-            font-weight: 600;
             margin: 0 0 10px 0;
-            letter-spacing: -0.5px;
         }
-
         .header h2 {
             color: #8b949e;
             font-size: 1.2rem;
-            font-weight: 400;
             margin: 0;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             width: 100%;
             max-width: 800px;
         }
-
-        .section-title {
-            grid-column: 1 / -1;
-            font-size: 1.1rem;
-            color: #8b949e;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
-        }
-
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 20px;
+            padding: 25px;
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
-
         .card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             border-color: var(--accent);
         }
-
-        .card h3 {
-            color: #ffffff;
-            font-size: 1.2rem;
-            margin: 0 0 15px 0;
-        }
-
+        .card h3 { color: #ffffff; margin: 0 0 10px 0; }
+        .card p { font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; line-height: 1.5; }
         .card a {
             display: inline-block;
             background-color: transparent;
@@ -99,19 +72,11 @@
             border: 1px solid var(--border);
             padding: 8px 16px;
             border-radius: 6px;
-            transition: all 0.2s;
-            font-size: 0.9rem;
+            transition: 0.2s;
         }
-
         .card a:hover {
             background-color: var(--border);
             color: var(--accent-hover);
-        }
-        
-        .footer {
-            margin-top: 50px;
-            font-size: 0.85rem;
-            color: #8b949e;
         }
     </style>
 </head>
@@ -119,49 +84,33 @@
 
     <div class="header">
         <h1>Eliseo Pancorbo Diaz</h1>
-        <h2>Computación Gráfica</h2>
+        <h2>Computación Gráfica - Actividades Dinámicas</h2>
     </div>
-
     <div class="container">
-        
-        <div class="section-title">Proyectos Dinámicos</div>
-
         <div class="card">
-            <h3>Gráfico de Barras Dinámico</h3>
-            <p style="font-size: 0.9rem; color: #8b949e;">Barras que actualizan su valor aleatoriamente en tiempo real.</p>
-            <a href="barras.html">Ver Ejercicio</a>
-        </div>
-
-        <div class="card">
-            <h3>Línea Doble Dinámica</h3>
-            <p style="font-size: 0.9rem; color: #8b949e;">Animación de dos ondas oscilando sobre y bajo una recta central.</p>
+            <h3>Ejercicio: linea doble Dinámicas</h3>
+            <p>Uso del DOM para generar 5 barras que actualizan su altura aleatoriamente cada segundo.</p>
             <a href="linea_doble.html">Ver Ejercicio</a>
         </div>
 
-        <div class="section-title">Prácticas Canvas (Imágenes)</div>
-
+    <div class="container">
         <div class="card">
-            <h3>Ejercicio 2: Figuras</h3>
-            <p style="font-size: 0.9rem; color: #8b949e;">Dibujo de un cuadrado y un triángulo usando trazos.</p>
-            <a href="ejercicio2_figuras.html">Ver Ejercicio</a>
+            <h3>Ejercicio 1: Barras Dinámicas</h3>
+            <p>Uso del DOM para generar 5 barras que actualizan su altura aleatoriamente cada segundo.</p>
+            <a href="ejercicio1.html">Ver Ejercicio</a>
         </div>
 
         <div class="card">
-            <h3>Ejercicio 3: Barras Estáticas</h3>
-            <p style="font-size: 0.9rem; color: #8b949e;">Gráfico de barras creado con datos predefinidos en Canvas.</p>
-            <a href="ejercicio3_barras.html">Ver Ejercicio</a>
+            <h3>Ejercicio 2: Puntos en Movimiento</h3>
+            <p>Uso de Canvas para dibujar 5 puntos que cambian de posición aleatoriamente cada segundo.</p>
+            <a href="ejercicio2.html">Ver Ejercicio</a>
         </div>
 
         <div class="card">
-            <h3>Ejercicio 4: Función Matemática</h3>
-            <p style="font-size: 0.9rem; color: #8b949e;">Gráfica de la función matemática cuadrática y = x².</p>
-            <a href="ejercicio4_funcion.html">Ver Ejercicio</a>
+            <h3>Ejercicio 3: Curva Coseno</h3>
+            <p>Uso de Canvas para graficar dinámicamente la función matemática y = cos(x) en movimiento.</p>
+            <a href="ejercicio3.html">Ver Ejercicio</a>
         </div>
-
-    </div>
-
-    <div class="footer">
-        &copy; 2026 Eliseo Pancorbo Diaz - Portafolio Académico
     </div>
 
 </body>
