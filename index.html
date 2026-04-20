@@ -5,78 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio - Computación Gráfica</title>
     <style>
+        /* Estilos generales y fondo moderno */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e2f;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #ffffff;
+            margin: 0;
+            padding: 40px 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
         }
-        .contenedor {
-            background-color: #2a2a40;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-        }
+
         h1 {
             color: #00ffcc;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+            margin-bottom: 5px;
+            text-align: center;
         }
-        p {
-            color: #a0a0b5;
-            margin-bottom: 30px;
+
+        p.subtitle {
+            color: #a8b2d1;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            text-align: center;
         }
-        ul {
+
+        /* Contenedor tipo Grid para las tarjetas */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* Estilo de cada tarjeta (Efecto vidrio) */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 255, 204, 0.2);
+            border-color: rgba(0, 255, 204, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .card-header .icon {
+            font-size: 1.5rem;
+        }
+
+        /* Estilo de los links (Botones internos) */
+        .link-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-        li {
-            margin-bottom: 15px;
+
+        .link-list li {
+            margin-bottom: 12px;
         }
-        a {
-            display: block;
-            background-color: #3b3b58;
-            color: #00ffcc;
+
+        .link-list a {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            color: #ccd6f6;
             text-decoration: none;
-            padding: 15px;
+            padding: 12px 15px;
             border-radius: 8px;
-            font-weight: bold;
+            font-weight: 500;
             transition: all 0.3s ease;
-            border: 1px solid transparent;
+            border-left: 4px solid transparent;
         }
-        a:hover {
-            background-color: #00ffcc;
-            color: #1e1e2f;
-            border: 1px solid #00ffcc;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+
+        .link-list a:hover {
+            background: rgba(0, 255, 204, 0.1);
+            color: #00ffcc;
+            border-left: 4px solid #00ffcc;
+            transform: translateX(5px);
+        }
+
+        .link-list a span {
+            margin-right: 10px;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="contenedor">
-        <h1>Computación Gráfica</h1>
-        <p>Portafolio de Ejercicios Prácticos</p>
+    <h1>Portafolio de Prácticas</h1>
+    <p class="subtitle">Computación Gráfica - Ejercicios Interactivos</p>
 
-        <ul>
-            <li><a href="barras.html">Ejercicio 1: Gráfico de Barras Dinámico</a></li>
-            <li><a href="puntos.html">Ejercicio 2: Gráfico de Puntos en Movimiento</a></li>
-            <li><a href="coseno.html">Ejercicio 3: Curva Dinámica de Coseno</a></li>
+    <div class="dashboard">
 
-            <li><a href="ejercicio4_arriba.html">Ejercicio 4: Función Matemática (Arriba)</a></li>
-            <li><a href="ejercicio4_profe.html">Ejercicio 4: Función Matemática (Profe)</a></li>
-            <li><a href="funcion_abajo.html">Función hacia abajo</a></li>
-            <li><a href="funcion_derecha.html">Función hacia la derecha</a></li>
-            <li><a href="funcion_izquierda.html">Función hacia la izquierda</a></li>
-        </ul>
+        <div class="card">
+            <div class="card-header">
+                <h2>Clase 1</h2>
+                <span class="icon">⚡</span>
+            </div>
+            <ul class="link-list">
+                <li><a href="Gráfico de Barras.html"><span>📁</span> Gráfico de Barras.html</a></li>
+                <li><a href="Función Arriba.html"><span>📁</span> Función Arriba.html</a></li>
+                <li><a href="Ejercicio Profe.html"><span>📁</span> Ejercicio Profe.html</a></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Clase 2</h2>
+                <span class="icon">🔥</span>
+            </div>
+            <ul class="link-list">
+                <li><a href="Función Abajo.html"><span>🔥</span> Función Abajo.html</a></li>
+                <li><a href="Función Derecha.html"><span>🔥</span> Función Derecha.html</a></li>
+                <li><a href="Función Izquierda.html"><span>🔥</span> Función Izquierda.html</a></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Actividad Práctica</h2>
+                <span class="icon">🚀</span>
+            </div>
+            <ul class="link-list">
+                <li><a href="Línea Dinámica.html"><span>📒</span> Línea Dinámica.html</a></li>
+                <li><a href="Trabajo Clase 1.html"><span>📒</span> Trabajo Clase 1.html</a></li>
+                <li><a href="Trabajo Clase 2.html"><span>📒</span> Trabajo Clase 2.html</a></li>
+            </ul>
+        </div>
+
     </div>
 
 </body>
