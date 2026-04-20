@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Función Matemática</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; border-radius: 6px; margin-bottom: 20px; transition: 0.2s; }
+        .btn-volver:hover { background-color: #30363d; }
+        canvas { background-color: #e6edf3; border: 1px solid #30363d; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    <h2>Ejercicio 4: Función y = x²</h2>
+    <canvas id="canvasFuncion" width="500" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvasFuncion");
+        const ctx = canvas.getContext("2d");
+
+        const centroX = canvas.width / 2;
+        const centroY = canvas.height - 50; // Mover el centro Y abajo porque x² va hacia arriba
+
+        // Dibujar Ejes X e Y
+        ctx.beginPath();
+        ctx.strokeStyle = "#8b949e";
+        ctx.moveTo(0, centroY); ctx.lineTo(canvas.width, centroY); // Eje X
+        ctx.moveTo(centroX, 0); ctx.lineTo(centroX, canvas.height); // Eje Y
+        ctx.stroke();
+
+        // Graficar y = x^2
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+
+        for (let x = -20; x <= 20; x += 0.1) {
+            let y = x * x; // La función matemática
+            
+            // Escalar para que se vea bien en el Canvas (multiplicamos por 10)
+            let px = centroX + (x * 10);
+            let py = centroY - (y * 5); // Restamos porque en Canvas el Y baja
+
+            if (x === -20) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+    </script>
+</body>
+</html>
