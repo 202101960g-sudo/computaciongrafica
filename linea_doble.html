@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Línea Doble Dinámica</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; border-radius: 6px; margin-bottom: 20px; transition: 0.2s; }
+        .btn-volver:hover { background-color: #30363d; }
+        canvas { background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    <h2>Línea Doble Dinámica</h2>
+    <canvas id="canvasLineas" width="700" height="300"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvasLineas");
+        const ctx = canvas.getContext("2d");
+        let tiempo = 0;
+
+        function animar() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const centroY = canvas.height / 2;
+
+            // 1. Dibujar recta central
+            ctx.beginPath();
+            ctx.moveTo(0, centroY);
+            ctx.lineTo(canvas.width, centroY);
+            ctx.strokeStyle = "#8b949e";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // 2. Dibujar línea dinámica ARRIBA
+            ctx.beginPath();
+            ctx.strokeStyle = "#ff7b72"; // Rojo suave
+            ctx.lineWidth = 3;
+            for (let x = 0; x < canvas.width; x++) {
+                let y = (centroY - 60) + Math.sin((x * 0.04) + tiempo) * 40;
+                if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // 3. Dibujar línea dinámica ABAJO
+            ctx.beginPath();
+            ctx.strokeStyle = "#79c0ff"; // Azul suave
+            ctx.lineWidth = 3;
+            for (let x = 0; x < canvas.width; x++) {
+                let y = (centroY + 60) + Math.cos((x * 0.04) + tiempo) * 40;
+                if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            tiempo -= 0.1; // Velocidad de animación
+            requestAnimationFrame(animar);
+        }
+        animar();
+    </script>
+</body>
+</html>
