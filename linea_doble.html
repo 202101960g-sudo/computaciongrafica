@@ -2,104 +2,102 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 4 - Línea Doble Pro</title>
+    <title>Ejercicio 4 - Velocidades Extremas</title>
     <style>
         body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; }
         .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #ff7b72; text-decoration: none; border-radius: 6px; margin-bottom: 20px; transition: 0.2s; }
         .btn-volver:hover { background-color: #30363d; }
-        canvas { background-color: #0d1117; border: 2px solid #30363d; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .info { color: #8b949e; font-size: 0.9rem; margin-top: 10px; }
+        canvas { background-color: #0d1117; border: 2px solid #30363d; border-radius: 8px; box-shadow: 0 0 20px rgba(88, 166, 255, 0.2); }
+        .legend { display: flex; justify-content: center; gap: 30px; margin-top: 15px; font-weight: bold; }
+        .red { color: #ff3333; }
+        .cyan { color: #00f2ff; }
     </style>
 </head>
 <body>
     <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
-    <h2>Plano Cartesiano: Ondas Dinámicas Cruzadas</h2>
+    <h2>Comparación de Frecuencia y Velocidad</h2>
     
-    <canvas id="lienzoPro" width="700" height="400"></canvas>
+    <canvas id="canvasPro" width="800" height="450"></canvas>
     
-    <p class="info">
-        <span style="color:#ff7b72;">🔴 Onda Roja:</span> Lenta y de gran amplitud. <br>
-        <span style="color:#58a6ff;">🔵 Onda Azul:</span> Rápida, pequeña y en dirección contraria.
-    </p>
+    <div class="legend">
+        <span class="red">● ONDA LENTA (Gran Tamaño)</span>
+        <span class="cyan">● ONDA RÁPIDA (Pequeña / Alta Velocidad)</span>
+    </div>
 
     <script>
-        const canvas = document.getElementById("lienzoPro");
+        const canvas = document.getElementById("canvasPro");
         const ctx = canvas.getContext("2d");
         
-        let tiempo = 0; // Variable de tiempo para la animación fluida
+        let t = 0; // Variable de tiempo
 
-        function dibujarPlanoCartesiano() {
+        function dibujarPlano() {
             const cx = canvas.width / 2;
             const cy = canvas.height / 2;
 
-            // 1. Dibujar Cuadrícula (Grid) de fondo
-            ctx.strokeStyle = "#161b22"; // Color muy sutil para la cuadrícula
+            // Cuadrícula sutil
+            ctx.strokeStyle = "#161b22";
             ctx.lineWidth = 1;
-            
-            // Líneas verticales
-            for(let i = 0; i < canvas.width; i += 40) {
+            for(let i = 0; i < canvas.width; i += 50) {
                 ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
             }
-            // Líneas horizontales
-            for(let i = 0; i < canvas.height; i += 40) {
+            for(let i = 0; i < canvas.height; i += 50) {
                 ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
             }
 
-            // 2. Dibujar Ejes X e Y principales
-            ctx.strokeStyle = "#8b949e";
+            // Ejes X e Y
+            ctx.strokeStyle = "#444d56";
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy); // Eje X
-            ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height); // Eje Y
+            ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
+            ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
             ctx.stroke();
         }
 
-        function animarOndas() {
-            // Limpiar lienzo
+        function render() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            dibujarPlano();
+
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            // --- ONDA 1: ROJA (GIGANTE Y LENTA) ---
+            ctx.beginPath();
+            ctx.strokeStyle = "#ff3333";
+            ctx.lineWidth = 4;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "#ff3333";
             
-            // Redibujar el plano cartesiano al fondo
-            dibujarPlanoCartesiano();
-
-            const cx = canvas.width / 2; // Centro X
-            const cy = canvas.height / 2; // Centro Y
-
-            // --- LÍNEA 1: ONDA ROJA (Seno - Grande y lenta) ---
-            ctx.beginPath();
-            ctx.strokeStyle = "#ff7b72"; 
-            ctx.lineWidth = 3;
             for (let x = -cx; x < cx; x++) {
-                // Matemática: Amplitud * sin(frecuencia * x + velocidad * tiempo)
-                let y = 120 * Math.sin(x * 0.02 + tiempo * 2);
-                
-                // Convertir coordenadas matemáticas a coordenadas de Canvas
+                // Amplitud 140 (Grande), Velocidad 0.5 (Lenta)
+                let y = 140 * Math.sin(x * 0.01 + t * 0.5); 
                 if (x === -cx) ctx.moveTo(cx + x, cy - y);
                 else ctx.lineTo(cx + x, cy - y);
             }
             ctx.stroke();
 
-            // --- LÍNEA 2: ONDA AZUL (Coseno - Pequeña y muy rápida) ---
+            // --- ONDA 2: CYAN (PEQUEÑA Y MUY RÁPIDA) ---
             ctx.beginPath();
-            ctx.strokeStyle = "#58a6ff"; 
+            ctx.strokeStyle = "#00f2ff";
             ctx.lineWidth = 2;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = "#00f2ff";
+            
             for (let x = -cx; x < cx; x++) {
-                // Frecuencia mayor (0.06), Amplitud menor (40), Velocidad negativa y rápida (-5)
-                let y = 40 * Math.cos(x * 0.06 - tiempo * 5);
-                
+                // Amplitud 30 (Pequeña), Frecuencia 0.1 (Muchas curvas), Velocidad 8 (Ultra Rápida)
+                let y = 30 * Math.sin(x * 0.1 + t * 8); 
                 if (x === -cx) ctx.moveTo(cx + x, cy - y);
                 else ctx.lineTo(cx + x, cy - y);
             }
             ctx.stroke();
 
-            // Avanzar el tiempo
-            tiempo += 0.015;
+            // Limpiar sombra para que no afecte a otros elementos
+            ctx.shadowBlur = 0;
 
-            // requestAnimationFrame crea una animación super fluida a 60FPS
-            requestAnimationFrame(animarOndas);
+            t += 0.05; // Incremento de tiempo constante
+            requestAnimationFrame(render);
         }
 
-        // Iniciar la animación
-        animarOndas();
+        render();
     </script>
 </body>
 </html>
