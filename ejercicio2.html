@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2 - Puntos</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; border-radius: 6px; margin-bottom: 20px; }
+        canvas { background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    <h2>Puntos en Movimiento</h2>
+    <canvas id="lienzo" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("lienzo");
+        const ctx = canvas.getContext("2d");
+
+        // Generar 5 puntos con coordenadas iniciales aleatorias
+        let puntos = [];
+        for(let i = 0; i < 5; i++) {
+            puntos.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height
+            });
+        }
+
+        function moverYDibujarPuntos() {
+            // Usar clearRect() para limpiar el lienzo
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Redibujar los puntos en su nueva posición
+            ctx.fillStyle = "#ff7b72"; // Rojo suave
+            
+            puntos.forEach(punto => {
+                // Cambiar posición de manera aleatoria
+                punto.x += (Math.random() * 60 - 30);
+                punto.y += (Math.random() * 60 - 30);
+
+                // Evitar que salgan del canvas
+                if (punto.x < 0) punto.x = 0; if (punto.x > canvas.width) punto.x = canvas.width;
+                if (punto.y < 0) punto.y = 0; if (punto.y > canvas.height) punto.y = canvas.height;
+
+                // Dibujar el punto
+                ctx.beginPath();
+                ctx.arc(punto.x, punto.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        // Actualizar coordenadas cada segundo (1000ms)
+        setInterval(moverYDibujarPuntos, 1000);
+        moverYDibujarPuntos(); // Llamada inicial
+    </script>
+</body>
+</html>
