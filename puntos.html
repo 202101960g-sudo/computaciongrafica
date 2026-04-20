@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Puntos en Movimiento</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; text-align: center; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 10px 20px; background-color: #ff4757; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 20px; transition: 0.3s; }
+        .btn-volver:hover { background-color: #ff6b81; box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3); }
+        canvas { background-color: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 2px solid #dfe4ea; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    
+    <h2>Simulación de Puntos en Movimiento</h2>
+    <canvas id="canvasPuntos" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvasPuntos");
+        const ctx = canvas.getContext("2d");
+
+        let puntos = [];
+        for(let i=0; i<8; i++) { // Puse 8 puntos para que se vea más genial
+            puntos.push({ 
+                x: Math.random() * canvas.width, 
+                y: Math.random() * canvas.height,
+                color: `hsl(${Math.random() * 360}, 100%, 50%)` // Colores aleatorios
+            });
+        }
+
+        function dibujar() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            puntos.forEach(p => {
+                p.x += (Math.random() * 30 - 15);
+                p.y += (Math.random() * 30 - 15);
+
+                // Evitar que se salgan del cuadro
+                if(p.x < 0) p.x = 0; if(p.x > canvas.width) p.x = canvas.width;
+                if(p.y < 0) p.y = 0; if(p.y > canvas.height) p.y = canvas.height;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 10, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+                ctx.strokeStyle = "black";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+        }
+
+        setInterval(dibujar, 500); // Se mueve cada medio segundo
+    </script>
+</body>
+</html>
