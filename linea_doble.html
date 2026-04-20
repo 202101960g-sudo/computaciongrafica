@@ -2,26 +2,26 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 4 - Velocidades Extremas</title>
+    <title>Ejercicio 4 - Ondas Separadas</title>
     <style>
         body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; }
         .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #ff7b72; text-decoration: none; border-radius: 6px; margin-bottom: 20px; transition: 0.2s; }
         .btn-volver:hover { background-color: #30363d; }
-        canvas { background-color: #0d1117; border: 2px solid #30363d; border-radius: 8px; box-shadow: 0 0 20px rgba(88, 166, 255, 0.2); }
-        .legend { display: flex; justify-content: center; gap: 30px; margin-top: 15px; font-weight: bold; }
-        .red { color: #ff3333; }
-        .cyan { color: #00f2ff; }
+        canvas { background-color: #0d1117; border: 2px solid #30363d; border-radius: 8px; box-shadow: 0 0 20px rgba(88, 166, 255, 0.1); }
+        .legend { display: flex; justify-content: center; gap: 30px; margin-top: 15px; font-size: 0.9rem; }
+        .green { color: #3fb950; }
+        .red { color: #ff7b72; }
     </style>
 </head>
 <body>
     <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
-    <h2>Comparación de Frecuencia y Velocidad</h2>
+    <h2>Ondas: Positiva vs Negativa (Movimiento a la Derecha)</h2>
     
     <canvas id="canvasPro" width="800" height="450"></canvas>
     
     <div class="legend">
-        <span class="red">● ONDA LENTA (Gran Tamaño)</span>
-        <span class="cyan">● ONDA RÁPIDA (Pequeña / Alta Velocidad)</span>
+        <span class="green">🟢 Arriba (Positiva): Larga, rápida y estirada.</span>
+        <span class="red">🔴 Abajo (Negativa): Corta, lenta y con más "puntadas".</span>
     </div>
 
     <script>
@@ -44,13 +44,20 @@
                 ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
             }
 
-            // Ejes X e Y
+            // Ejes X e Y principales (Eje 0)
             ctx.strokeStyle = "#444d56";
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
-            ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
+            ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy); // Eje X (Punto 0 de altura)
+            ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height); // Eje Y (Centro)
             ctx.stroke();
+
+            // Etiquetas del eje Y
+            ctx.fillStyle = "#8b949e";
+            ctx.font = "12px sans-serif";
+            ctx.fillText("+Y (Positivo)", cx + 10, 20);
+            ctx.fillText("-Y (Negativo)", cx + 10, canvas.height - 10);
+            ctx.fillText("0", cx + 5, cy - 5);
         }
 
         function render() {
@@ -60,40 +67,40 @@
             const cx = canvas.width / 2;
             const cy = canvas.height / 2;
 
-            // --- ONDA 1: ROJA (GIGANTE Y LENTA) ---
+            // --- ONDA 1: ARRIBA (POSITIVA) | LARGA Y RÁPIDA ---
             ctx.beginPath();
-            ctx.strokeStyle = "#ff3333";
-            ctx.lineWidth = 4;
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = "#ff3333";
+            ctx.strokeStyle = "#3fb950"; // Verde
+            ctx.lineWidth = 3;
             
             for (let x = -cx; x < cx; x++) {
-                // Amplitud 140 (Grande), Velocidad 0.5 (Lenta)
-                let y = 140 * Math.sin(x * 0.01 + t * 0.5); 
-                if (x === -cx) ctx.moveTo(cx + x, cy - y);
-                else ctx.lineTo(cx + x, cy - y);
+                // Eje base en +120 (Arriba del 0)
+                // x * 0.02 = Ondas largas
+                // - t * 6 = Movimiento rápido a la DERECHA
+                let yMath = 120 + 40 * Math.sin(x * 0.02 - t * 6); 
+                
+                // Convertimos coordenada matemática a coordenada de Canvas
+                if (x === -cx) ctx.moveTo(cx + x, cy - yMath);
+                else ctx.lineTo(cx + x, cy - yMath);
             }
             ctx.stroke();
 
-            // --- ONDA 2: CYAN (PEQUEÑA Y MUY RÁPIDA) ---
+            // --- ONDA 2: ABAJO (NEGATIVA) | CORTA Y LENTA ---
             ctx.beginPath();
-            ctx.strokeStyle = "#00f2ff";
-            ctx.lineWidth = 2;
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = "#00f2ff";
+            ctx.strokeStyle = "#ff7b72"; // Rojo
+            ctx.lineWidth = 3;
             
             for (let x = -cx; x < cx; x++) {
-                // Amplitud 30 (Pequeña), Frecuencia 0.1 (Muchas curvas), Velocidad 8 (Ultra Rápida)
-                let y = 30 * Math.sin(x * 0.1 + t * 8); 
-                if (x === -cx) ctx.moveTo(cx + x, cy - y);
-                else ctx.lineTo(cx + x, cy - y);
+                // Eje base en -120 (Abajo del 0)
+                // x * 0.1 = Ondas cortas (más puntadas)
+                // - t * 1.5 = Movimiento lento a la DERECHA
+                let yMath = -120 + 20 * Math.sin(x * 0.1 - t * 1.5); 
+                
+                if (x === -cx) ctx.moveTo(cx + x, cy - yMath);
+                else ctx.lineTo(cx + x, cy - yMath);
             }
             ctx.stroke();
 
-            // Limpiar sombra para que no afecte a otros elementos
-            ctx.shadowBlur = 0;
-
-            t += 0.05; // Incremento de tiempo constante
+            t += 0.02; // Aumentamos el tiempo
             requestAnimationFrame(render);
         }
 
