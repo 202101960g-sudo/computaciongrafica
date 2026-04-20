@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3 - Función Coseno</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; border-radius: 6px; margin-bottom: 20px; }
+        canvas { background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    <h2>Curva Dinámica: y = cos(x)</h2>
+    <canvas id="canvasCoseno" width="600" height="300"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvasCoseno");
+        const ctx = canvas.getContext("2d");
+        
+        let avanceVariable = 0; // El valor que irá avanzando con el tiempo
+
+        function actualizarCoseno() {
+            // Limpiar lienzo
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar eje X central
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.strokeStyle = "#8b949e";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Dibujar la curva usando líneas
+            ctx.beginPath();
+            ctx.strokeStyle = "#3fb950"; // Verde brillante
+            ctx.lineWidth = 3;
+
+            for (let x = 0; x < canvas.width; x++) {
+                // Calcular puntos de la función coseno
+                // y = cos(x)
+                let y = (canvas.height / 2) + Math.cos((x * 0.05) + avanceVariable) * 80;
+                
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+
+            // Avanzar la variable para mostrar el movimiento
+            avanceVariable -= 0.5; 
+        }
+
+        // Actualizar la gráfica usando setInterval
+        // Nota: Pongo 100ms para que se vea como una onda dinámica fluida como pide el ejercicio.
+        setInterval(actualizarCoseno, 100);
+        actualizarCoseno();
+    </script>
+</body>
+</html>
