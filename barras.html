@@ -4,31 +4,37 @@
     <meta charset="UTF-8">
     <title>Barras Dinámicas</title>
     <style>
-        #contenedor { display: flex; align-items: flex-end; height: 200px; gap: 10px; border-bottom: 2px solid black; padding: 10px; }
-        .barra { width: 40px; background-color: orange; border: 1px solid black; transition: height 0.5s; }
+        body { font-family: sans-serif; background-color: #f4f4f9; text-align: center; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 10px 20px; background-color: #ff4757; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 20px; transition: 0.3s; }
+        .btn-volver:hover { background-color: #ff6b81; box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3); }
+        .grafico-container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: inline-block; }
+        #contenedor { display: flex; align-items: flex-end; height: 250px; gap: 15px; border-bottom: 3px solid #2f3542; padding-bottom: 5px; width: 300px; justify-content: center; margin: 0 auto; }
+        .barra { width: 45px; background: linear-gradient(to top, #1e90ff, #00a8ff); border-radius: 5px 5px 0 0; transition: height 0.5s ease-in-out; }
     </style>
 </head>
 <body>
-    <h2>Ejercicio 1: Gráfico de Barras Dinámico</h2>
-    <div id="contenedor">
-        <div class="barra"></div>
-        <div class="barra"></div>
-        <div class="barra"></div>
-        <div class="barra"></div>
-        <div class="barra"></div>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    
+    <div class="grafico-container">
+        <h2>Gráfico de Barras en Tiempo Real</h2>
+        <div id="contenedor">
+            <div class="barra"></div>
+            <div class="barra"></div>
+            <div class="barra"></div>
+            <div class="barra"></div>
+            <div class="barra"></div>
+        </div>
     </div>
 
     <script>
         const barras = document.querySelectorAll('.barra');
-
         function actualizarBarras() {
             barras.forEach(barra => {
-                const alturaAleatoria = Math.floor(Math.random() * 90) + 10; // Entre 10 y 100
+                const alturaAleatoria = Math.floor(Math.random() * 90) + 10;
                 barra.style.height = alturaAleatoria + '%';
             });
         }
-
-        setInterval(actualizarBarras, 1000); // Actualiza cada segundo
+        setInterval(actualizarBarras, 1000);
         actualizarBarras();
     </script>
 </body>
