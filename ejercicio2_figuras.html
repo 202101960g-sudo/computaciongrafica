@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuadrado y Triángulo</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; border-radius: 6px; margin-bottom: 20px; transition: 0.2s; }
+        .btn-volver:hover { background-color: #30363d; }
+        canvas { background-color: white; border: 2px solid red; /* Tal como tu imagen */ }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    <h2>Ejercicio 2: Cuadrado y Triángulo</h2>
+    <canvas id="canvasFiguras" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvasFiguras");
+        const ctx = canvas.getContext("2d");
+
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 3;
+
+        // Dibujar Cuadrado
+        ctx.strokeRect(120, 40, 150, 150);
+
+        // Dibujar Triángulo
+        ctx.beginPath();
+        ctx.moveTo(200, 230); // Punta superior
+        ctx.lineTo(120, 350); // Esquina inferior izquierda
+        ctx.lineTo(280, 330); // Esquina inferior derecha (ligeramente inclinada como en tu foto)
+        ctx.closePath();
+        ctx.stroke();
+    </script>
+</body>
+</html>
