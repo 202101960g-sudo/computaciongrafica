@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Función Coseno</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; text-align: center; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 10px 20px; background-color: #ff4757; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-bottom: 20px; transition: 0.3s; }
+        .btn-volver:hover { background-color: #ff6b81; box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3); }
+        canvas { background-color: #2ed573; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    
+    <h2>Onda Dinámica (Función Coseno)</h2>
+    <canvas id="canvasCoseno" width="700" height="300"></canvas>
+
+    <script>
+        const canvas = document.getElementById("canvasCoseno");
+        const ctx = canvas.getContext("2d");
+        let desplazamiento = 0;
+
+        function dibujarCoseno() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar línea central (Eje X)
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.5)"; // Línea blanca semi-transparente
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Dibujar la curva
+            ctx.beginPath();
+            ctx.strokeStyle = "white"; // Curva blanca
+            ctx.lineWidth = 3;
+
+            for (let x = 0; x < canvas.width; x++) {
+                let y = 150 + Math.cos((x * 0.03) + desplazamiento) * 80;
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+
+            ctx.stroke();
+            desplazamiento += 0.1; // Velocidad de la onda
+            requestAnimationFrame(dibujarCoseno); // Animación mucho más fluida que setInterval
+        }
+
+        dibujarCoseno();
+    </script>
+</body>
+</html>
