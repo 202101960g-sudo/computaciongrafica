@@ -2,23 +2,24 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 2 - Puntos</title>
+    <title>Ejercicio 2 - Puntos Dinámicos</title>
     <style>
         body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; }
-        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; border-radius: 6px; margin-bottom: 20px; }
-        canvas { background-color: #161b22; border: 1px solid #30363d; border-radius: 8px; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #58a6ff; text-decoration: none; border-radius: 6px; margin-bottom: 20px; transition: 0.2s; }
+        .btn-volver:hover { background-color: #30363d; }
+        canvas { background-color: #0d1117; border: 2px solid #30363d; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
     </style>
 </head>
 <body>
     <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
-    <h2>Puntos en Movimiento</h2>
-    <canvas id="lienzo" width="600" height="400"></canvas>
+    <h2>Puntos en Movimiento sobre Plano Cartesiano</h2>
+    <canvas id="lienzoPuntos" width="700" height="400"></canvas>
 
     <script>
-        const canvas = document.getElementById("lienzo");
+        const canvas = document.getElementById("lienzoPuntos");
         const ctx = canvas.getContext("2d");
 
-        // Generar 5 puntos con coordenadas iniciales aleatorias
+        // Generar 5 puntos con posiciones iniciales aleatorias
         let puntos = [];
         for(let i = 0; i < 5; i++) {
             puntos.push({
@@ -27,32 +28,63 @@
             });
         }
 
+        // Función para dibujar el fondo cuadriculado y los ejes
+        function dibujarPlanoCartesiano() {
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            ctx.strokeStyle = "#161b22"; // Cuadrícula sutil
+            ctx.lineWidth = 1;
+            for(let i = 0; i < canvas.width; i += 40) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke(); }
+            for(let i = 0; i < canvas.height; i += 40) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke(); }
+
+            ctx.strokeStyle = "#8b949e"; // Ejes principales
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy); // Eje X
+            ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height); // Eje Y
+            ctx.stroke();
+        }
+
         function moverYDibujarPuntos() {
-            // Usar clearRect() para limpiar el lienzo
+            // 4. Limpiar el lienzo antes de dibujar la nueva posición
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Redibujar los puntos en su nueva posición
-            ctx.fillStyle = "#ff7b72"; // Rojo suave
             
-            puntos.forEach(punto => {
-                // Cambiar posición de manera aleatoria
-                punto.x += (Math.random() * 60 - 30);
-                punto.y += (Math.random() * 60 - 30);
+            // Dibujar el plano de fondo
+            dibujarPlanoCartesiano();
 
-                // Evitar que salgan del canvas
-                if (punto.x < 0) punto.x = 0; if (punto.x > canvas.width) punto.x = canvas.width;
-                if (punto.y < 0) punto.y = 0; if (punto.y > canvas.height) punto.y = canvas.height;
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+
+            puntos.forEach((punto, index) => {
+                // 3. Cambiar posición de manera aleatoria cada segundo
+                punto.x += (Math.random() * 80 - 40);
+                punto.y += (Math.random() * 80 - 40);
+
+                // Evitar que los puntos se salgan del Canvas
+                if (punto.x < 20) punto.x = 20; if (punto.x > canvas.width - 20) punto.x = canvas.width - 20;
+                if (punto.y < 20) punto.y = 20; if (punto.y > canvas.height - 20) punto.y = canvas.height - 20;
 
                 // Dibujar el punto
+                ctx.fillStyle = "#ff7b72"; // Color rojo para el punto
                 ctx.beginPath();
-                ctx.arc(punto.x, punto.y, 8, 0, Math.PI * 2);
+                ctx.arc(punto.x, punto.y, 6, 0, Math.PI * 2);
                 ctx.fill();
+
+                // Calcular las coordenadas matemáticas relativas al centro (0,0)
+                let coordX = Math.round((punto.x - cx) / 10);
+                let coordY = Math.round((cy - punto.y) / 10); // Invertimos Y para que arriba sea positivo
+
+                // Mostrar el texto con las coordenadas generadas
+                ctx.fillStyle = "#c9d1d9"; // Color del texto
+                ctx.font = "14px monospace";
+                ctx.fillText(`P${index + 1} (${coordX}, ${coordY})`, punto.x + 10, punto.y - 10);
             });
         }
 
         // Actualizar coordenadas cada segundo (1000ms)
         setInterval(moverYDibujarPuntos, 1000);
-        moverYDibujarPuntos(); // Llamada inicial
+        moverYDibujarPuntos(); // Llamada inicial para que no espere 1 segundo en blanco
     </script>
 </body>
 </html>
