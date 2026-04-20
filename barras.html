@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Barras Dinámicas</title>
+    <style>
+        #contenedor { display: flex; align-items: flex-end; height: 200px; gap: 10px; border-bottom: 2px solid black; padding: 10px; }
+        .barra { width: 40px; background-color: orange; border: 1px solid black; transition: height 0.5s; }
+    </style>
+</head>
+<body>
+    <h2>Ejercicio 1: Gráfico de Barras Dinámico</h2>
+    <div id="contenedor">
+        <div class="barra"></div>
+        <div class="barra"></div>
+        <div class="barra"></div>
+        <div class="barra"></div>
+        <div class="barra"></div>
+    </div>
+
+    <script>
+        const barras = document.querySelectorAll('.barra');
+
+        function actualizarBarras() {
+            barras.forEach(barra => {
+                const alturaAleatoria = Math.floor(Math.random() * 90) + 10; // Entre 10 y 100
+                barra.style.height = alturaAleatoria + '%';
+            });
+        }
+
+        setInterval(actualizarBarras, 1000); // Actualiza cada segundo
+        actualizarBarras();
+    </script>
+</body>
+</html>
