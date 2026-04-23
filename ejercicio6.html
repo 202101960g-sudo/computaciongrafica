@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 6 - Rotación 3D</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; margin: 0; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #a371f7; text-decoration: none; border-radius: 6px; margin-bottom: 20px; transition: 0.2s; }
+        .btn-volver:hover { background-color: #30363d; }
+        #canvas-container { margin: 0 auto; width: 800px; height: 450px; border: 2px solid #30363d; border-radius: 8px; overflow: hidden; background-color: #161b22; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    <h2>2. Rotación continua de un objeto sobre sus ejes</h2>
+    <p style="color: #8b949e;">El cubo mantiene su posición, pero gira constantemente en X y Y.</p>
+    
+    <div id="canvas-container"></div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 800 / 450, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(800, 450);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Luces para apreciar las caras del cubo
+        const luz = new THREE.DirectionalLight(0xffffff, 1.5);
+        luz.position.set(2, 5, 3);
+        scene.add(luz);
+        scene.add(new THREE.AmbientLight(0x222222));
+
+        // Añadir Cubo con textura de "alambre" superpuesta para ver mejor la rotación
+        const geometria = new THREE.BoxGeometry(2, 2, 2);
+        const material = new THREE.MeshStandardMaterial({ color: 0xff7b72 }); // Rojo
+        const cubo = new THREE.Mesh(geometria, material);
+        
+        // Borde negro para distinguir mejor el giro
+        const bordes = new THREE.EdgesGeometry(geometria);
+        const lineas = new THREE.LineSegments(bordes, new THREE.LineBasicMaterial({ color: 0x000000 }));
+        cubo.add(lineas);
+        
+        scene.add(cubo);
+        camera.position.z = 5;
+
+        // Bucle de Animación
+        function animar() {
+            requestAnimationFrame(animar);
+
+            // Modificar la orientación (Rotación en X y Y)
+            cubo.rotation.x += 0.01;
+            cubo.rotation.y += 0.015;
+
+            renderer.render(scene, camera);
+        }
+
+        animar();
+    </script>
+</body>
+</html>
