@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 7 - Transformaciones 3D</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; margin: 0; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #a371f7; text-decoration: none; border-radius: 6px; margin-bottom: 10px; transition: 0.2s; }
+        .btn-volver:hover { background-color: #30363d; }
+        #canvas-container { margin: 0 auto; width: 800px; height: 450px; border: 2px solid #30363d; border-radius: 8px; overflow: hidden; background-color: #161b22; position: relative; }
+        
+        /* Panel de instrucciones superpuesto */
+        .controles { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 15px; border-radius: 8px; text-align: left; font-size: 0.85rem; border: 1px solid #444; }
+        .controles h4 { margin: 0 0 10px 0; color: #a371f7; }
+        .controles ul { margin: 0; padding-left: 20px; color: #c9d1d9; }
+        .controles span { color: #58a6ff; font-weight: bold; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    <h2>3. Manipulación Interactiva (Traslación, Rotación y Escalado)</h2>
+    <p style="color: #8b949e;">Usa tu teclado para aplicar las transformaciones en tiempo real.</p>
+    
+    <div id="canvas-container">
+        <div class="controles">
+            <h4>Controles de Transformación:</h4>
+            <ul>
+                <li><span>[W] [A] [S] [D]</span> : Traslación (Mover)</li>
+                <li><span>[Flechas]</span> : Rotación (Girar)</li>
+                <li><span>[+]</span> y <span>[-]</span> : Escalado (Tamaño)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 800 / 450, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(800, 450);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Luces
+        const luz = new THREE.DirectionalLight(0xffffff, 1.2);
+        luz.position.set(2, 5, 5);
+        scene.add(luz);
+        scene.add(new THREE.AmbientLight(0x404040));
+
+        // Objeto interactivo
+        const geometria = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+        const material = new THREE.MeshStandardMaterial({ color: 0x3fb950 }); // Verde
+        const cubo = new THREE.Mesh(geometria, material);
+        scene.add(cubo);
+        camera.position.z = 6;
+
+        // Escuchar eventos del teclado
+        document.addEventListener('keydown', (event) => {
+            const tecla = event.key.toLowerCase();
+            
+            // --- TRASLACIÓN ---
+            if(tecla === 'w') cubo.position.y += 0.2; // Arriba
+            if(tecla === 's') cubo.position.y -= 0.2; // Abajo
+            if(tecla === 'a') cubo.position.x -= 0.2; // Izquierda
+            if(tecla === 'd') cubo.position.x += 0.2; // Derecha
+
+            // --- ROTACIÓN ---
+            if(event.key === 'ArrowUp') cubo.rotation.x -= 0.2;
+            if(event.key === 'ArrowDown') cubo.rotation.x += 0.2;
+            if(event.key === 'ArrowLeft') cubo.rotation.y -= 0.2;
+            if(event.key === 'ArrowRight') cubo.rotation.y += 0.2;
+
+            // --- ESCALADO ---
+            if(event.key === '+') {
+                cubo.scale.x += 0.1;
+                cubo.scale.y += 0.1;
+                cubo.scale.z += 0.1;
+            }
+            if(event.key === '-') {
+                // Evitar que se vuelva de tamaño negativo
+                if(cubo.scale.x > 0.2) {
+                    cubo.scale.x -= 0.1;
+                    cubo.scale.y -= 0.1;
+                    cubo.scale.z -= 0.1;
+                }
+            }
+        });
+
+        function animar() {
+            requestAnimationFrame(animar);
+            renderer.render(scene, camera);
+        }
+        animar();
+    </script>
+</body>
+</html>
