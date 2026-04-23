@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 5 - Traslación 3D</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; margin: 0; }
+        .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #a371f7; text-decoration: none; border-radius: 6px; margin-bottom: 20px; transition: 0.2s; }
+        .btn-volver:hover { background-color: #30363d; }
+        #canvas-container { margin: 0 auto; width: 800px; height: 450px; border: 2px solid #30363d; border-radius: 8px; overflow: hidden; background-color: #161b22; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
+    <h2>1. Traslación animada de un cubo en el eje X</h2>
+    <p style="color: #8b949e;">El cubo se mueve sin cambiar su forma ni rotación.</p>
+    
+    <div id="canvas-container"></div>
+
+    <script>
+        // 1. Configurar Escena, Cámara y Renderizador
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 800 / 450, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(800, 450);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // 2. Crear Luces (para que se vean las sombras 3D)
+        const luz = new THREE.DirectionalLight(0xffffff, 1);
+        luz.position.set(5, 5, 5);
+        scene.add(luz);
+        scene.add(new THREE.AmbientLight(0x404040));
+
+        // 3. Crear el Cubo
+        const geometria = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+        const material = new THREE.MeshStandardMaterial({ color: 0x58a6ff }); // Azul
+        const cubo = new THREE.Mesh(geometria, material);
+        scene.add(cubo);
+
+        // Posicionar cámara
+        camera.position.z = 5;
+
+        // Variables de movimiento
+        let velocidadX = 0.03;
+        let limite = 3.5; // Hasta dónde llega antes de rebotar
+
+        // 4. Bucle de Animación
+        function animar() {
+            requestAnimationFrame(animar);
+
+            // Traslación en el eje X
+            cubo.position.x += velocidadX;
+
+            // Rebotar en los extremos
+            if (cubo.position.x > limite || cubo.position.x < -limite) {
+                velocidadX = velocidadX * -1; // Invertir dirección
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        animar();
+    </script>
+</body>
+</html>
