@@ -2,14 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 7 - Transformaciones 3D (Corregido)</title>
+    <title>Ejercicio 7 - Transformaciones 3D (Límites Dinámicos)</title>
     <style>
         body { font-family: sans-serif; background-color: #0d1117; color: white; text-align: center; padding: 20px; margin: 0; }
         .btn-volver { display: inline-block; padding: 8px 16px; border: 1px solid #30363d; color: #a371f7; text-decoration: none; border-radius: 6px; margin-bottom: 10px; transition: 0.2s; }
         .btn-volver:hover { background-color: #30363d; }
         #canvas-container { margin: 0 auto; width: 800px; height: 450px; border: 2px solid #30363d; border-radius: 8px; overflow: hidden; background-color: #161b22; position: relative; }
         
-        /* Panel de instrucciones superpuesto */
         .controles { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); padding: 15px; border-radius: 8px; text-align: left; font-size: 0.85rem; border: 1px solid #444; pointer-events: none; }
         .controles h4 { margin: 0 0 10px 0; color: #a371f7; }
         .controles ul { margin: 0; padding-left: 20px; color: #c9d1d9; list-style-type: none; padding-left: 0;}
@@ -20,15 +19,15 @@
 </head>
 <body>
     <a href="index.html" class="btn-volver">⬅ Volver al Menú</a>
-    <h2>3. Manipulación Interactiva con Límites de Seguridad</h2>
-    <p style="color: #8b949e;">Usa tu teclado. El cubo ya no se saldrá del área visible.</p>
+    <h2>3. Manipulación Interactiva (Límites Estrictos)</h2>
+    <p style="color: #8b949e;">El cubo ahora reconoce su propio tamaño y nunca cruzará las paredes.</p>
     
     <div id="canvas-container">
         <div class="controles">
             <h4>Controles:</h4>
             <ul>
                 <li><span>[W]</span> Arriba / <span>[S]</span> Abajo</li>
-                <li><span>[A]</span> Izquierda / <span>[D]</span> Derecha</li>
+                <li><span>[A]</span> Izq / <span>[D]</span> Der</li>
                 <li><span>[Flechas]</span> Rotar</li>
                 <li><span>[+]</span> Agrandar / <span>[-]</span> Encoger</li>
             </ul>
@@ -36,91 +35,81 @@
     </div>
 
     <script>
-        // 1. Escena, Cámara y Renderizador
+        // 1. Configuración Base
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, 800 / 450, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(800, 450);
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // 2. Luces
         const luz = new THREE.DirectionalLight(0xffffff, 1.2);
         luz.position.set(2, 5, 5);
         scene.add(luz);
         scene.add(new THREE.AmbientLight(0x404040));
 
-        // 3. Objeto interactivo
-        const geometria = new THREE.BoxGeometry(1.5, 1.5, 1.5);
-        const material = new THREE.MeshStandardMaterial({ color: 0x3fb950 }); // Verde
+        // 2. El Cubo
+        const TAMAÑO_BASE = 1.5;
+        const geometria = new THREE.BoxGeometry(TAMAÑO_BASE, TAMAÑO_BASE, TAMAÑO_BASE);
+        const material = new THREE.MeshStandardMaterial({ color: 0x3fb950 });
         const cubo = new THREE.Mesh(geometria, material);
         scene.add(cubo);
         camera.position.z = 6;
 
-        // --- DEFINICIÓN DE LÍMITES DE SEGURIDAD (CORRECCIÓN) ---
-        // Estos valores mantienen el cubo dentro del recuadro negro
-        const LIMITE_X = 3.2; 
-        const LIMITE_Y = 2.2;
-        const PASO_MOVIMIENTO = 0.2; // Qué tanto se mueve por pulsación
+        // Limites absolutos de la cámara a distancia z=6
+        const BORDE_PANTALLA_X = 7.4; 
+        const BORDE_PANTALLA_Y = 4.0;
 
-        // 4. Escuchar eventos del teclado
+        // 3. Controles con Matemáticas de Colisión
         document.addEventListener('keydown', (event) => {
             const tecla = event.key.toLowerCase();
             
-            // --- TRASLACIÓN CON LÍMITES ---
-            
-            // Mover Arriba (W) - Verifica que no pase el límite superior
-            if(tecla === 'w') {
-                if (cubo.position.y + PASO_MOVIMIENTO < LIMITE_Y) {
-                    cubo.position.y += PASO_MOVIMIENTO;
-                }
-            }
-            // Mover Abajo (S) - Verifica que no pase el límite inferior
-            if(tecla === 's') {
-                if (cubo.position.y - PASO_MOVIMIENTO > -LIMITE_Y) {
-                    cubo.position.y -= PASO_MOVIMIENTO;
-                }
-            }
-            // Mover Izquierda (A) - Verifica límite izquierdo
-            if(tecla === 'a') {
-                if (cubo.position.x - PASO_MOVIMIENTO > -LIMITE_X) {
-                    cubo.position.x -= PASO_MOVIMIENTO;
-                }
-            }
-            // Mover Derecha (D) - Verifica límite derecho
-            if(tecla === 'd') {
-                if (cubo.position.x + PASO_MOVIMIENTO < LIMITE_X) {
-                    cubo.position.x += PASO_MOVIMIENTO;
-                }
-            }
+            // Dónde intenta ir el usuario
+            let nuevaX = cubo.position.x;
+            let nuevaY = cubo.position.y;
 
-            // --- ROTACIÓN (Sin límites, puede girar siempre) ---
-            const PASO_ROTACION = 0.2;
-            if(event.key === 'ArrowUp') cubo.rotation.x -= PASO_ROTACION;
-            if(event.key === 'ArrowDown') cubo.rotation.x += PASO_ROTACION;
-            if(event.key === 'ArrowLeft') cubo.rotation.y -= PASO_ROTACION;
-            if(event.key === 'ArrowRight') cubo.rotation.y += PASO_ROTACION;
+            if(tecla === 'w') nuevaY += 0.3;
+            if(tecla === 's') nuevaY -= 0.3;
+            if(tecla === 'a') nuevaX -= 0.3;
+            if(tecla === 'd') nuevaX += 0.3;
 
-            // --- ESCALADO (Con límites para no desaparecer ni invertirse) ---
-            const PASO_ESCALA = 0.1;
+            // Calcular cuánto espacio físico ocupa el cubo ahora mismo
+            let espacioOcupado = (TAMAÑO_BASE * cubo.scale.x) / 2;
+
+            // Limite exacto para que el borde del cubo choque con el borde de la pantalla
+            let maximoX = Math.max(0, BORDE_PANTALLA_X - espacioOcupado);
+            let maximoY = Math.max(0, BORDE_PANTALLA_Y - espacioOcupado);
+
+            // Aplicar restricción rígida (Math.min y Math.max evitan que pase del número)
+            cubo.position.x = Math.max(-maximoX, Math.min(maximoX, nuevaX));
+            cubo.position.y = Math.max(-maximoY, Math.min(maximoY, nuevaY));
+
+            // -- ROTACIÓN --
+            if(event.key === 'ArrowUp') cubo.rotation.x -= 0.2;
+            if(event.key === 'ArrowDown') cubo.rotation.x += 0.2;
+            if(event.key === 'ArrowLeft') cubo.rotation.y -= 0.2;
+            if(event.key === 'ArrowRight') cubo.rotation.y += 0.2;
+
+            // -- ESCALADO --
             if(event.key === '+') {
-                // Límite máximo de tamaño (3x el original)
                 if(cubo.scale.x < 3) {
-                    cubo.scale.x += PASO_ESCALA;
-                    cubo.scale.y += PASO_ESCALA;
-                    cubo.scale.z += PASO_ESCALA;
+                    cubo.scale.set(cubo.scale.x + 0.1, cubo.scale.y + 0.1, cubo.scale.z + 0.1);
+                    
+                    // Si al crecer se sale de la pantalla, lo empujamos de vuelta hacia adentro
+                    let nuevoEspacio = (TAMAÑO_BASE * cubo.scale.x) / 2;
+                    let nuevoMaxX = Math.max(0, BORDE_PANTALLA_X - nuevoEspacio);
+                    let nuevoMaxY = Math.max(0, BORDE_PANTALLA_Y - nuevoEspacio);
+                    cubo.position.x = Math.max(-nuevoMaxX, Math.min(nuevoMaxX, cubo.position.x));
+                    cubo.position.y = Math.max(-nuevoMaxY, Math.min(nuevoMaxY, cubo.position.y));
                 }
             }
             if(event.key === '-') {
-                // Límite mínimo de tamaño (no menor a 0.3x)
                 if(cubo.scale.x > 0.3) {
-                    cubo.scale.x -= PASO_ESCALA;
-                    cubo.scale.y -= PASO_ESCALA;
-                    cubo.scale.z -= PASO_ESCALA;
+                    cubo.scale.set(cubo.scale.x - 0.1, cubo.scale.y - 0.1, cubo.scale.z - 0.1);
                 }
             }
         });
 
-        // 5. Bucle de renderizado
+        // 4. Renderizado
         function animar() {
             requestAnimationFrame(animar);
             renderer.render(scene, camera);
