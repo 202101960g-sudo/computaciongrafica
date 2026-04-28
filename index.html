@@ -14,8 +14,28 @@
         .card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px; transition: 0.2s; display: flex; flex-direction: column;}
         .card:hover { border-color: var(--accent); transform: translateY(-3px); }
         
-        /* ESTILO DE LA MINIATURA */
-        .card-img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; border: 1px solid var(--border); background-color: #0d1117; }
+        /* CONTENEDOR DEL IFRAME (MINIATURA EN VIVO) */
+        .iframe-container {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            position: relative;
+            background: #000;
+        }
+        .iframe-container iframe {
+            width: 800px; /* Tamaño original de tu canvas */
+            height: 450px;
+            border: none;
+            transform: scale(0.35); /* Lo encoge para que quepa en la tarjeta */
+            transform-origin: top left;
+            pointer-events: none; /* Bloquea el mouse para que solo sea de lectura */
+        }
+        
+        /* Estilo para los PDFs */
+        .pdf-icon { height: 150px; background-color: #0d1117; display: flex; align-items: center; justify-content: center; font-size: 3rem; border-radius: 6px; margin-bottom: 15px; border: 1px solid var(--border); }
         
         .card h3 { color: #ffffff; margin: 0 0 10px 0; font-size: 1.1rem; }
         .card h4 { color: #ff7b72; margin: 0 0 10px 0; font-size: 0.9rem; font-weight: normal; }
@@ -36,19 +56,19 @@
     <h2 class="section-title">Investigaciones</h2>
     <div class="container">
         <div class="card" style="border-top: 3px solid #ff7b72;">
-            <img src="mini_pdf1.jpg" alt="Miniatura PDF 1" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/ff7b72?text=PDF'">
+            <div class="pdf-icon">📄</div>
             <h3>Sistemas de Graficación</h3>
             <p>PDF sobre conceptos base.</p>
             <a href="sistemas_graficacion.pdf" target="_blank" class="btn-pdf">Ver PDF</a>
         </div>
         <div class="card" style="border-top: 3px solid #ff7b72;">
-            <img src="mini_pdf2.jpg" alt="Miniatura PDF 2" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/ff7b72?text=PDF'">
+            <div class="pdf-icon">📄</div>
             <h3>Transformación 3D</h3>
             <p>PDF sobre fundamentos 3D.</p>
             <a href="transformacion_3d.pdf" target="_blank" class="btn-pdf">Ver PDF</a>
         </div>
         <div class="card" style="border-top: 3px solid #ff7b72;">
-            <img src="mini_pdf3.jpg" alt="Miniatura PDF 3" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/ff7b72?text=PDF'">
+            <div class="pdf-icon">📄</div>
             <h3>Curvas y Mallas</h3>
             <h4>Actividad número 6</h4>
             <p>1. Curvas Paramétricas / 2. Mallas Poligonales</p>
@@ -59,22 +79,22 @@
     <h2 class="section-title">Actividad número 4: Transformación de Datos</h2>
     <div class="container">
         <div class="card">
-            <img src="mini_ej1.jpg" alt="Miniatura Ejercicio 1" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/58a6ff?text=Ejercicio+1'">
+            <div class="iframe-container"><iframe src="ejercicio1.html" scrolling="no"></iframe></div>
             <h3>Ejercicio 1: Barras</h3>
             <a href="ejercicio1.html">Ver</a>
         </div>
         <div class="card">
-            <img src="mini_ej2.jpg" alt="Miniatura Ejercicio 2" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/58a6ff?text=Ejercicio+2'">
+            <div class="iframe-container"><iframe src="ejercicio2.html" scrolling="no"></iframe></div>
             <h3>Ejercicio 2: Puntos</h3>
             <a href="ejercicio2.html">Ver</a>
         </div>
         <div class="card">
-            <img src="mini_ej3.jpg" alt="Miniatura Ejercicio 3" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/58a6ff?text=Ejercicio+3'">
+            <div class="iframe-container"><iframe src="ejercicio3.html" scrolling="no"></iframe></div>
             <h3>Ejercicio 3: Curva Coseno</h3>
             <a href="ejercicio3.html">Ver</a>
         </div>
         <div class="card">
-            <img src="mini_ej4.jpg" alt="Miniatura Ejercicio 4" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/58a6ff?text=Ejercicio+4'">
+            <div class="iframe-container"><iframe src="linea_doble.html" scrolling="no"></iframe></div>
             <h3>Ejercicio 4: Línea Doble</h3>
             <a href="linea_doble.html">Ver</a>
         </div>
@@ -83,17 +103,17 @@
     <h2 class="section-title">Actividad número 5: Visualización 3D</h2>
     <div class="container">
         <div class="card" style="border-left: 4px solid #a371f7;">
-            <img src="mini_ej5.jpg" alt="Miniatura Ejercicio 5" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/a371f7?text=Ejercicio+5'">
+            <div class="iframe-container"><iframe src="ejercicio5.html" scrolling="no"></iframe></div>
             <h3>Ejercicio 5: Traslación</h3>
             <a href="ejercicio5.html" class="btn-3d">Ver</a>
         </div>
         <div class="card" style="border-left: 4px solid #a371f7;">
-            <img src="mini_ej6.jpg" alt="Miniatura Ejercicio 6" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/a371f7?text=Ejercicio+6'">
+            <div class="iframe-container"><iframe src="ejercicio6.html" scrolling="no"></iframe></div>
             <h3>Ejercicio 6: Rotación</h3>
             <a href="ejercicio6.html" class="btn-3d">Ver</a>
         </div>
         <div class="card" style="border-left: 4px solid #a371f7;">
-            <img src="mini_ej7.jpg" alt="Miniatura Ejercicio 7" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/a371f7?text=Ejercicio+7'">
+            <div class="iframe-container"><iframe src="ejercicio7.html" scrolling="no"></iframe></div>
             <h3>Ejercicio 7: Interactivo</h3>
             <a href="ejercicio7.html" class="btn-3d">Ver</a>
         </div>
