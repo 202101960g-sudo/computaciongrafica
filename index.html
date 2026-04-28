@@ -10,13 +10,19 @@
         .header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); width: 100%; max-width: 900px; padding-bottom: 20px; }
         .section-title { width: 100%; max-width: 900px; color: #ffffff; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-top: 40px; margin-bottom: 20px; }
         .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 900px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px; transition: 0.2s; }
+        
+        .card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px; transition: 0.2s; display: flex; flex-direction: column;}
         .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        
+        /* ESTILO DE LA MINIATURA */
+        .card-img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; border: 1px solid var(--border); background-color: #0d1117; }
+        
         .card h3 { color: #ffffff; margin: 0 0 10px 0; font-size: 1.1rem; }
         .card h4 { color: #ff7b72; margin: 0 0 10px 0; font-size: 0.9rem; font-weight: normal; }
-        .card p { font-size: 0.85rem; color: #8b949e; margin-bottom: 15px; }
-        .card a { display: inline-block; color: var(--accent); text-decoration: none; border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 0.9rem; }
+        .card p { font-size: 0.85rem; color: #8b949e; margin-bottom: 15px; flex-grow: 1;}
+        .card a { display: inline-block; text-align: center; color: var(--accent); text-decoration: none; border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; margin-top: auto;}
         .card a:hover { background-color: var(--border); }
+        
         .btn-pdf { color: #ff7b72 !important; border-color: #ff7b72 !important; }
         .btn-3d { color: #a371f7 !important; border-color: #a371f7 !important; }
     </style>
@@ -30,16 +36,19 @@
     <h2 class="section-title">Investigaciones</h2>
     <div class="container">
         <div class="card" style="border-top: 3px solid #ff7b72;">
+            <img src="mini_pdf1.jpg" alt="Miniatura PDF 1" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/ff7b72?text=PDF'">
             <h3>Sistemas de Graficación</h3>
             <p>PDF sobre conceptos base.</p>
             <a href="sistemas_graficacion.pdf" target="_blank" class="btn-pdf">Ver PDF</a>
         </div>
         <div class="card" style="border-top: 3px solid #ff7b72;">
+            <img src="mini_pdf2.jpg" alt="Miniatura PDF 2" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/ff7b72?text=PDF'">
             <h3>Transformación 3D</h3>
             <p>PDF sobre fundamentos 3D.</p>
             <a href="transformacion_3d.pdf" target="_blank" class="btn-pdf">Ver PDF</a>
         </div>
         <div class="card" style="border-top: 3px solid #ff7b72;">
+            <img src="mini_pdf3.jpg" alt="Miniatura PDF 3" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/ff7b72?text=PDF'">
             <h3>Curvas y Mallas</h3>
             <h4>Actividad número 6</h4>
             <p>1. Curvas Paramétricas / 2. Mallas Poligonales</p>
@@ -50,18 +59,22 @@
     <h2 class="section-title">Actividad número 4: Transformación de Datos</h2>
     <div class="container">
         <div class="card">
+            <img src="mini_ej1.jpg" alt="Miniatura Ejercicio 1" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/58a6ff?text=Ejercicio+1'">
             <h3>Ejercicio 1: Barras</h3>
             <a href="ejercicio1.html">Ver</a>
         </div>
         <div class="card">
+            <img src="mini_ej2.jpg" alt="Miniatura Ejercicio 2" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/58a6ff?text=Ejercicio+2'">
             <h3>Ejercicio 2: Puntos</h3>
             <a href="ejercicio2.html">Ver</a>
         </div>
         <div class="card">
+            <img src="mini_ej3.jpg" alt="Miniatura Ejercicio 3" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/58a6ff?text=Ejercicio+3'">
             <h3>Ejercicio 3: Curva Coseno</h3>
             <a href="ejercicio3.html">Ver</a>
         </div>
         <div class="card">
+            <img src="mini_ej4.jpg" alt="Miniatura Ejercicio 4" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/58a6ff?text=Ejercicio+4'">
             <h3>Ejercicio 4: Línea Doble</h3>
             <a href="linea_doble.html">Ver</a>
         </div>
@@ -70,14 +83,17 @@
     <h2 class="section-title">Actividad número 5: Visualización 3D</h2>
     <div class="container">
         <div class="card" style="border-left: 4px solid #a371f7;">
+            <img src="mini_ej5.jpg" alt="Miniatura Ejercicio 5" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/a371f7?text=Ejercicio+5'">
             <h3>Ejercicio 5: Traslación</h3>
             <a href="ejercicio5.html" class="btn-3d">Ver</a>
         </div>
         <div class="card" style="border-left: 4px solid #a371f7;">
+            <img src="mini_ej6.jpg" alt="Miniatura Ejercicio 6" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/a371f7?text=Ejercicio+6'">
             <h3>Ejercicio 6: Rotación</h3>
             <a href="ejercicio6.html" class="btn-3d">Ver</a>
         </div>
         <div class="card" style="border-left: 4px solid #a371f7;">
+            <img src="mini_ej7.jpg" alt="Miniatura Ejercicio 7" class="card-img" onerror="this.src='https://via.placeholder.com/300x140/0d1117/a371f7?text=Ejercicio+7'">
             <h3>Ejercicio 7: Interactivo</h3>
             <a href="ejercicio7.html" class="btn-3d">Ver</a>
         </div>
