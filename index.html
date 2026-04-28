@@ -5,164 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio | Eliseo Pancorbo Diaz</title>
     <style>
-        :root { 
-            --bg-color: #0d1117; 
-            --card-bg: #161b22; 
-            --text-main: #c9d1d9; 
-            --accent: #58a6ff; 
-            --accent-hover: #79c0ff; 
-            --border: #30363d; 
-        }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            margin: 0; 
-            padding: 50px 20px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
-        .header { 
-            text-align: center; 
-            margin-bottom: 40px; 
-            border-bottom: 1px solid var(--border); 
-            padding-bottom: 20px; 
-            width: 100%; 
-            max-width: 900px; 
-        }
-        .header h1 { color: #ffffff; font-size: 2.5rem; margin: 0 0 10px 0; }
-        .header h2 { color: #8b949e; font-size: 1.2rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
-        
-        .section-title { 
-            width: 100%; 
-            max-width: 900px; 
-            color: #ffffff; 
-            border-bottom: 2px solid var(--border); 
-            padding-bottom: 10px; 
-            margin-top: 40px; 
-            margin-bottom: 20px; 
-        }
-        
-        .container { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 20px; 
-            width: 100%; 
-            max-width: 900px; 
-        }
-        
-        .card { 
-            background-color: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 10px; 
-            padding: 25px; 
-            transition: 0.2s; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .card:hover { 
-            transform: translateY(-5px); 
-            border-color: var(--accent); 
-        }
-        .card h3 { color: #ffffff; margin: 0 0 10px 0; font-size: 1.05rem; line-height: 1.4; }
-        .card p { font-size: 0.85rem; color: #8b949e; margin-bottom: 20px; line-height: 1.5; }
-        
-        .card a { 
-            display: inline-block; 
-            text-align: center;
-            background-color: transparent; 
-            color: var(--accent); 
-            text-decoration: none; 
-            border: 1px solid var(--border); 
-            padding: 8px 16px; 
-            border-radius: 6px; 
-            transition: 0.2s; 
-            font-size: 0.9rem;
-        }
-        .card a:hover { 
-            background-color: var(--border); 
-            color: var(--accent-hover); 
-        }
-        
-        /* Colores por sección */
+        :root { --bg-color: #0d1117; --card-bg: #161b22; --text-main: #c9d1d9; --accent: #58a6ff; --border: #30363d; }
+        body { font-family: sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); width: 100%; max-width: 900px; padding-bottom: 20px; }
+        .section-title { width: 100%; max-width: 900px; color: #ffffff; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-top: 40px; margin-bottom: 20px; }
+        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 900px; }
+        .card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px; transition: 0.2s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .card h3 { color: #ffffff; margin: 0 0 10px 0; font-size: 1.1rem; }
+        .card h4 { color: #ff7b72; margin: 0 0 10px 0; font-size: 0.9rem; font-weight: normal; }
+        .card p { font-size: 0.85rem; color: #8b949e; margin-bottom: 15px; }
+        .card a { display: inline-block; color: var(--accent); text-decoration: none; border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 0.9rem; }
+        .card a:hover { background-color: var(--border); }
         .btn-pdf { color: #ff7b72 !important; border-color: #ff7b72 !important; }
-        .btn-pdf:hover { background-color: rgba(255, 123, 114, 0.1) !important; }
-        
         .btn-3d { color: #a371f7 !important; border-color: #a371f7 !important; }
-        .btn-3d:hover { background-color: rgba(163, 113, 247, 0.1) !important; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Eliseo Pancorbo Diaz</h1>
-        <h2>Computación Gráfica - Portafolio</h2>
+        <h2>Computación Gráfica</h2>
     </div>
 
-    <h2 class="section-title" style="color: #ff7b72; border-color: #ff7b72;">📚 Investigaciones Teóricas</h2>
+    <h2 class="section-title">Investigaciones</h2>
     <div class="container">
-        
         <div class="card" style="border-top: 3px solid #ff7b72;">
             <h3>Sistemas de Graficación</h3>
-            <p>Documento de investigación sobre los conceptos base y funcionamiento de los sistemas de graficación.</p>
-            <a href="sistemas_graficacion.pdf" target="_blank" class="btn-pdf">Abrir PDF</a>
+            <p>PDF sobre conceptos base.</p>
+            <a href="sistemas_graficacion.pdf" target="_blank" class="btn-pdf">Ver PDF</a>
         </div>
-
         <div class="card" style="border-top: 3px solid #ff7b72;">
             <h3>Transformación 3D</h3>
-            <p>Análisis y fundamentos matemáticos sobre las transformaciones de objetos en el espacio tridimensional.</p>
-            <a href="transformacion_3d.pdf" target="_blank" class="btn-pdf">Abrir PDF</a>
+            <p>PDF sobre fundamentos 3D.</p>
+            <a href="transformacion_3d.pdf" target="_blank" class="btn-pdf">Ver PDF</a>
         </div>
-
         <div class="card" style="border-top: 3px solid #ff7b72;">
-            <h3>1. Curvas Paramétricas<br>2. Mallas Poligonales</h3>
-            <p>Estudio conjunto sobre la generación de curvas y el modelado de superficies mediante polígonos.</p>
-            <a href="curvas_y_mallas.pdf" target="_blank" class="btn-pdf">Abrir PDF</a>
+            <h3>Curvas y Mallas</h3>
+            <h4>Actividad número 6</h4>
+            <p>1. Curvas Paramétricas / 2. Mallas Poligonales</p>
+            <a href="curvas_y_mallas.pdf" target="_blank" class="btn-pdf">Ver PDF</a>
         </div>
-
     </div>
 
-    <h2 class="section-title">Visualización 2D (Canvas & DOM)</h2>
+    <h2 class="section-title">Actividad número 4: Transformación de Datos</h2>
     <div class="container">
         <div class="card">
             <h3>Ejercicio 1: Barras</h3>
-            <p>DOM y actualización de altura aleatoria de 5 barras.</p>
-            <a href="ejercicio1.html">Ver Ejercicio</a>
+            <a href="ejercicio1.html">Ver</a>
         </div>
         <div class="card">
             <h3>Ejercicio 2: Puntos</h3>
-            <p>Dibujo de puntos aleatorios en plano cartesiano.</p>
-            <a href="ejercicio2.html">Ver Ejercicio</a>
+            <a href="ejercicio2.html">Ver</a>
         </div>
         <div class="card">
             <h3>Ejercicio 3: Curva Coseno</h3>
-            <p>Representación dinámica de la función matemática y = cos(x).</p>
-            <a href="ejercicio3.html">Ver Ejercicio</a>
+            <a href="ejercicio3.html">Ver</a>
         </div>
         <div class="card">
             <h3>Ejercicio 4: Línea Doble</h3>
-            <p>Línea dinámica con valores positivos y negativos.</p>
-            <a href="linea_doble.html">Ver Ejercicio</a>
+            <a href="linea_doble.html">Ver</a>
         </div>
     </div>
 
-    <h2 class="section-title">Visualización 3D (Three.js)</h2>
+    <h2 class="section-title">Actividad número 5: Visualización 3D</h2>
     <div class="container">
         <div class="card" style="border-left: 4px solid #a371f7;">
-            <h3>5. Traslación Animada</h3>
-            <p>Movimiento lineal de un cubo en el espacio 3D.</p>
-            <a href="ejercicio5.html" class="btn-3d">Ver Ejercicio</a>
+            <h3>Ejercicio 5: Traslación</h3>
+            <a href="ejercicio5.html" class="btn-3d">Ver</a>
         </div>
         <div class="card" style="border-left: 4px solid #a371f7;">
-            <h3>6. Rotación Continua</h3>
-            <p>Cubo girando sobre sus ejes X y Y de forma fluida.</p>
-            <a href="ejercicio6.html" class="btn-3d">Ver Ejercicio</a>
+            <h3>Ejercicio 6: Rotación</h3>
+            <a href="ejercicio6.html" class="btn-3d">Ver</a>
         </div>
         <div class="card" style="border-left: 4px solid #a371f7;">
-            <h3>7. Manipulación Interactiva</h3>
-            <p>Control por teclado de un objeto con límites estrictos.</p>
-            <a href="ejercicio7.html" class="btn-3d">Ver Ejercicio</a>
+            <h3>Ejercicio 7: Interactivo</h3>
+            <a href="ejercicio7.html" class="btn-3d">Ver</a>
         </div>
     </div>
 </body>
