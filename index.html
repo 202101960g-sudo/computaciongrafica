@@ -40,13 +40,13 @@
             color: #ffffff; 
             border-bottom: 2px solid var(--border); 
             padding-bottom: 10px; 
-            margin-top: 20px; 
+            margin-top: 40px; 
             margin-bottom: 20px; 
         }
         
         .container { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 20px; 
             width: 100%; 
             max-width: 900px; 
@@ -58,16 +58,20 @@
             border-radius: 10px; 
             padding: 25px; 
             transition: 0.2s; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .card:hover { 
             transform: translateY(-5px); 
             border-color: var(--accent); 
         }
-        .card h3 { color: #ffffff; margin: 0 0 10px 0; font-size: 1.1rem; }
-        .card p { font-size: 0.9rem; color: #8b949e; margin-bottom: 20px; line-height: 1.5; min-height: 40px; }
+        .card h3 { color: #ffffff; margin: 0 0 10px 0; font-size: 1.05rem; line-height: 1.4; }
+        .card p { font-size: 0.85rem; color: #8b949e; margin-bottom: 20px; line-height: 1.5; }
         
         .card a { 
             display: inline-block; 
+            text-align: center;
             background-color: transparent; 
             color: var(--accent); 
             text-decoration: none; 
@@ -75,21 +79,48 @@
             padding: 8px 16px; 
             border-radius: 6px; 
             transition: 0.2s; 
+            font-size: 0.9rem;
         }
         .card a:hover { 
             background-color: var(--border); 
             color: var(--accent-hover); 
         }
         
-        /* Estilo especial para los botones 3D */
+        /* Colores por sección */
+        .btn-pdf { color: #ff7b72 !important; border-color: #ff7b72 !important; }
+        .btn-pdf:hover { background-color: rgba(255, 123, 114, 0.1) !important; }
+        
         .btn-3d { color: #a371f7 !important; border-color: #a371f7 !important; }
-        .btn-3d:hover { background-color: var(--border) !important; color: #bc8cff !important; }
+        .btn-3d:hover { background-color: rgba(163, 113, 247, 0.1) !important; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Eliseo Pancorbo Diaz</h1>
         <h2>Computación Gráfica - Portafolio</h2>
+    </div>
+
+    <h2 class="section-title" style="color: #ff7b72; border-color: #ff7b72;">📚 Investigaciones Teóricas</h2>
+    <div class="container">
+        
+        <div class="card" style="border-top: 3px solid #ff7b72;">
+            <h3>Sistemas de Graficación</h3>
+            <p>Documento de investigación sobre los conceptos base y funcionamiento de los sistemas de graficación.</p>
+            <a href="sistemas_graficacion.pdf" target="_blank" class="btn-pdf">Abrir PDF</a>
+        </div>
+
+        <div class="card" style="border-top: 3px solid #ff7b72;">
+            <h3>Transformación 3D</h3>
+            <p>Análisis y fundamentos matemáticos sobre las transformaciones de objetos en el espacio tridimensional.</p>
+            <a href="transformacion_3d.pdf" target="_blank" class="btn-pdf">Abrir PDF</a>
+        </div>
+
+        <div class="card" style="border-top: 3px solid #ff7b72;">
+            <h3>1. Curvas Paramétricas<br>2. Mallas Poligonales</h3>
+            <p>Estudio conjunto sobre la generación de curvas y el modelado de superficies mediante polígonos.</p>
+            <a href="curvas_y_mallas.pdf" target="_blank" class="btn-pdf">Abrir PDF</a>
+        </div>
+
     </div>
 
     <h2 class="section-title">Visualización 2D (Canvas & DOM)</h2>
@@ -101,7 +132,7 @@
         </div>
         <div class="card">
             <h3>Ejercicio 2: Puntos</h3>
-            <p>Dibujo de puntos aleatorios en plano cartesiano usando Canvas.</p>
+            <p>Dibujo de puntos aleatorios en plano cartesiano.</p>
             <a href="ejercicio2.html">Ver Ejercicio</a>
         </div>
         <div class="card">
@@ -110,17 +141,17 @@
             <a href="ejercicio3.html">Ver Ejercicio</a>
         </div>
         <div class="card">
-            <h3 style="color: #ff7b72;">Ejercicio 4: Línea Doble</h3>
+            <h3>Ejercicio 4: Línea Doble</h3>
             <p>Línea dinámica con valores positivos y negativos.</p>
-            <a href="linea_doble.html" style="color: #ff7b72; border-color: #ff7b72;">Ver Ejercicio</a>
+            <a href="linea_doble.html">Ver Ejercicio</a>
         </div>
     </div>
 
-    <h2 class="section-title" style="margin-top: 50px;">Visualización 3D (Three.js)</h2>
+    <h2 class="section-title">Visualización 3D (Three.js)</h2>
     <div class="container">
         <div class="card" style="border-left: 4px solid #a371f7;">
             <h3>5. Traslación Animada</h3>
-            <p>Movimiento lineal de un cubo en el espacio 3D (Eje X).</p>
+            <p>Movimiento lineal de un cubo en el espacio 3D.</p>
             <a href="ejercicio5.html" class="btn-3d">Ver Ejercicio</a>
         </div>
         <div class="card" style="border-left: 4px solid #a371f7;">
@@ -130,7 +161,7 @@
         </div>
         <div class="card" style="border-left: 4px solid #a371f7;">
             <h3>7. Manipulación Interactiva</h3>
-            <p>Control total por teclado: Mover, Girar y Escalar un objeto 3D.</p>
+            <p>Control por teclado de un objeto con límites estrictos.</p>
             <a href="ejercicio7.html" class="btn-3d">Ver Ejercicio</a>
         </div>
     </div>
