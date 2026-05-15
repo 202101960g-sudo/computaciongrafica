@@ -14,27 +14,9 @@
         .card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px; transition: 0.2s; display: flex; flex-direction: column;}
         .card:hover { border-color: var(--accent); transform: translateY(-3px); }
         
-        /* CONTENEDOR DEL IFRAME (MINIATURA EN VIVO) */
-        .iframe-container {
-            width: 100%;
-            height: 150px;
-            overflow: hidden;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            border: 1px solid var(--border);
-            position: relative;
-            background: #000;
-        }
-        .iframe-container iframe {
-            width: 800px; /* Tamaño original de tu canvas */
-            height: 450px;
-            border: none;
-            transform: scale(0.35); /* Lo encoge para que quepa en la tarjeta */
-            transform-origin: top left;
-            pointer-events: none; /* Bloquea el mouse para que solo sea de lectura */
-        }
+        .iframe-container { width: 100%; height: 150px; overflow: hidden; border-radius: 6px; margin-bottom: 15px; border: 1px solid var(--border); position: relative; background: #000; }
+        .iframe-container iframe { width: 800px; height: 450px; border: none; transform: scale(0.35); transform-origin: top left; pointer-events: none; }
         
-        /* Estilo para los PDFs */
         .pdf-icon { height: 150px; background-color: #0d1117; display: flex; align-items: center; justify-content: center; font-size: 3rem; border-radius: 6px; margin-bottom: 15px; border: 1px solid var(--border); }
         
         .card h3 { color: #ffffff; margin: 0 0 10px 0; font-size: 1.1rem; }
@@ -43,6 +25,8 @@
         .card a { display: inline-block; text-align: center; color: var(--accent); text-decoration: none; border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; margin-top: auto;}
         .card a:hover { background-color: var(--border); }
         
+        /* Colores especiales */
+        .btn-grupal { color: #2ea043 !important; border-color: #2ea043 !important; }
         .btn-pdf { color: #ff7b72 !important; border-color: #ff7b72 !important; }
         .btn-3d { color: #a371f7 !important; border-color: #a371f7 !important; }
     </style>
@@ -51,6 +35,15 @@
     <div class="header">
         <h1>Eliseo Pancorbo Diaz</h1>
         <h2>Computación Gráfica</h2>
+    </div>
+
+    <h2 class="section-title" style="color: #2ea043; border-color: #2ea043;">👥 Proyecto en Grupo</h2>
+    <div class="container" style="grid-template-columns: 1fr;"> <div class="card" style="border: 2px solid #2ea043;">
+            <div class="pdf-icon" style="background-color: rgba(46, 160, 67, 0.1);">🤝</div>
+            <h3>APLICACIONES DEL MODELADO 3D</h3>
+            <p>Integrantes: HUARAC YARANGA Paul Andre, PANCORBO DIAZ Eliseo, SALLO VARGAS Bryan, GUTIERREZ ROBLES Michael David, HUACHACA PACHECO Fernando, PANUERA HUARHUA Max Kervin. Este es el proyecto principal desarrollado en equipo.</p>
+            <a href="proyecto_grupal.pdf" target="_blank" class="btn-grupal">Abrir Proyecto Grupal</a>
+        </div>
     </div>
 
     <h2 class="section-title">Investigaciones</h2>
